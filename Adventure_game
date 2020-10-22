@@ -1,0 +1,144 @@
+import time
+import random
+bag = []
+undiscovered_items = ["matches", "torch", "map"]
+
+
+def print_pause(message_to_print):
+    print(message_to_print)
+    time.sleep(2)
+
+
+def intro():
+    print_pause("You are walking through the dark forest "
+                "trying to find your way.")
+    print_pause("You can barely make out a shed on the side "
+                "that might have items that "
+                "can help you.")
+    print_pause("You enter the dark shed and see a desk, "
+                "a closet, and a sink.")
+    print_pause("The first thing you need to find is a "
+                "light so that you can see better.")
+
+
+def random_required1(undiscovered_items, bag):
+    if "torch" in bag:
+        print_pause("Awesome! You found a map of the surrounding area! "
+                    "You can finally find your way home!")
+        print_pause("You win!")
+        play_again()
+    elif "matches" in bag:
+        print_pause("Nice! You found a torch that you can "
+                    "light on fire with the matches!")
+        bag.append("torch")
+        undiscovered_items.remove("torch")
+    else:
+        result = (random.choices(undiscovered_items, k=1))
+        if "matches" in result:
+            print_pause("You feel around and find some matches! "
+                        "You can probably light something on fire "
+                        "so you can see better.")
+            bag.append("matches")
+            undiscovered_items.remove("matches")
+        else:
+            print_pause("You can't see anything. "
+                        "Try to find a light!")
+    print_pause("You step away from the desk.")
+    enter_shed(undiscovered_items, bag)
+
+
+def random_required2(undiscovered_items, bag):
+    if "torch" in bag:
+        print_pause("Awesome! You found a map of the surrounding area! "
+                    "You can finally find your way home!")
+        print_pause("You win!")
+        play_again()
+    elif "matches" in bag:
+        print_pause("Nice! You found a torch that you "
+                    "can light on fire with the matches!")
+        bag.append("torch")
+        undiscovered_items.remove("torch")
+    else:
+        result = (random.choices(undiscovered_items, k=1))
+        if "matches" in result:
+            print_pause("You feel around and find some matches! "
+                        "You can probably light something on fire "
+                        "so you can see better.")
+            bag.append("matches")
+            undiscovered_items.remove("matches")
+        else:
+                print_pause("You can't see anything. "
+                            "Try to find a light!")
+    print_pause("You step away from the closet.")
+    enter_shed(undiscovered_items, bag)
+
+
+def random_required3(undiscovered_items, bag):
+    if "torch" in bag:
+        print_pause("Awesome! You found a map of the surrounding area! "
+                    "You can finally find your way home!")
+        print_pause("You win!")
+        play_again()
+    elif "matches" in bag:
+        print_pause("Nice! You found a torch that you "
+                    "can light on fire with the matches!")
+        bag.append("torch")
+        undiscovered_items.remove("torch")
+    else:
+        result = (random.choices(undiscovered_items, k=1))
+        if "matches" in result:
+            print_pause("You feel around and find some matches! "
+                        "You can probably light something on fire "
+                        "so you can see better.")
+            bag.append("matches")
+            undiscovered_items.remove("matches")
+        else:
+                print_pause("You can't see anything. "
+                            "Try to find a light!")
+    print_pause("You step away from the sink.")
+    enter_shed(undiscovered_items, bag)
+
+
+def enter_shed(undiscovered_items, bag):
+    print_pause("Enter the number according to what "
+                "object you would like to search.")
+    print_pause("You can also check what items are "
+                "in your bag so far: ")
+    choice1 = input("1. Search desk.\n"
+                    "2. Search closet.\n"
+                    "3. Search sink.\n"
+                    "4. Check bag.\n")
+    if choice1 == "1":
+        random_required1(undiscovered_items, bag)
+    if choice1 == "2":
+        random_required2(undiscovered_items, bag)
+    if choice1 == "3":
+        random_required3(undiscovered_items, bag)
+    if choice1 == "4":
+        print(bag)
+        time.sleep(2)
+        enter_shed(undiscovered_items, bag)
+    else:
+        enter_shed(undiscovered_items, bag)
+
+
+def play_game():
+    undiscovered_items = ["matches", "torch", "map"]
+    intro()
+    bag = []
+    enter_shed(undiscovered_items, bag)
+
+
+def play_again():
+    question = input("Would you like to play again? [Y/N]").upper()
+    if question == "Y":
+            play_game()
+    if question == "N":
+            print("Thanks for playing!")
+            exit()
+    else:
+            print_pause("That is not a valid response.  Please select Yes(Y) or No(N).")
+            play_again()
+
+
+play_game()
